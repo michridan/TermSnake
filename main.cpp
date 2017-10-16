@@ -13,5 +13,6 @@ int main(void)
 	initscr(); 
 	cbreak();
 
+	endwin();
 	return 0;
 }
