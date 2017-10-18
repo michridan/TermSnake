@@ -33,11 +33,11 @@ int main(void)
 	else
 		size = 50;
 
-	initx = cols - size;
+	initx = (cols / 2) - size;
 	inity = (rows - size) / 2;
-	board = newwin(size, size, inity, initx);
+	board = newwin(size, size * 2, inity, initx);
 	box(board, 0, 0);
-	mvwprintw(board, (size / 2), ((size - 35) / 2), "--Now I'm testing the inner window--");
+	mvwprintw(board, (size / 2), size - (35 / 2), "--Now I'm testing the inner window--");
 	wrefresh(board);
 
 	getch();
