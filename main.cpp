@@ -16,24 +16,29 @@ int main(void)
 	noecho();
 	keypad(stdscr, TRUE);
 
+	//Test screen
+	printw("--This is a test of the standard screen--");
+	refresh();
+	getch();
+
 	// Calculate the size of the board
 	getmaxyx(stdscr, rows, cols);
-	if(rows <= 30 || cols <= 30)
+	if(rows <= 50 || cols <= 100)
 	{
-		if(rows < cols)
+		if(rows < (cols / 2))
 			size = rows;
 		else
-			size = cols;
+			size = (cols / 2);
 	}
 	else
-		size = 30;
+		size = 50;
 
-	initx = 0;
-	inity = 0;
+	initx = cols - size;
+	inity = (rows - size) / 2;
 	board = newwin(size, size, inity, initx);
 	box(board, 0, 0);
+	mvwprintw(board, (size / 2), ((size - 35) / 2), "--Now I'm testing the inner window--");
 	wrefresh(board);
-	refresh();
 
 	getch();
 	
