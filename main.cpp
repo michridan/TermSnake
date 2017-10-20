@@ -1,5 +1,5 @@
 /*	TermSnake: A game by Michael Dandrea
- *	Last Updated: 10/17/17
+ *	Last Updated: 10/20/17
  *	Description: This game will ultimately be a version of the classic Snake game to be played in terminal
  */
 
@@ -15,11 +15,7 @@ int main(void)
 	cbreak();
 	noecho();
 	keypad(stdscr, TRUE);
-
-	//Test screen
-	printw("--This is a test of the standard screen--");
 	refresh();
-	getch();
 
 	// Calculate the size of the board
 	getmaxyx(stdscr, rows, cols);
@@ -37,7 +33,8 @@ int main(void)
 	inity = (rows - size) / 2;
 	board = newwin(size, size * 2, inity, initx);
 	box(board, 0, 0);
-	mvwprintw(board, (size / 2), size - (35 / 2), "--Now I'm testing the inner window--");
+	mvwprintw(board, (size / 2), size - 10, "Welcome to TermSnake!");
+	mvwprintw(board, (size / 2), size - 10, "Nothing to do yet :/");
 	wrefresh(board);
 
 	getch();
