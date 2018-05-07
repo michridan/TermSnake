@@ -33,7 +33,7 @@ int main(void)
 	inity = (rows - size) / 2;
 	board = newwin(size, size * 2, inity, initx);
 	box(board, 0, 0);
-	mvwprintw(board, (size / 2), size - 10, "Welcome to TermSnake!");
+	mvwprintw(board, (size / 2) - 1, size - 13, "Welcome to TermSnake v0.0!");
 	mvwprintw(board, (size / 2), size - 10, "Nothing to do yet :/");
 	wrefresh(board);
 
