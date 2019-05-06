@@ -1,5 +1,6 @@
 #include <ncurses.h>
 #include <stdlib.h>
+#include <math.h>
 
 struct Pos2D
 {
@@ -26,21 +27,36 @@ Pos2D operator+(Pos2D lhs, Pos2D rhs)
 
 void randomDraw(WINDOW *win, Pos2D bounds, char c)
 {
-    int drawX = (rand() % bounds.x) + 1, drawY = (rand() % bounds.y) + 1;
-
-    drawX += (drawX % 2) - 1; //TODO: Find a way to get rid of this
+    int drawX = ((rand() % bounds.x) + 1) * 2, drawY = (rand() % bounds.y) + 1;
 
     mvwaddch(win, drawY, drawX, c);
 }
 
-/*
 bool charBetween(WINDOW *win, Pos2D start, Pos2D end, char c)
 {
-    for(int x = start.x; x <= end.x; x++)
-    {
-        for(int y = start.y; y <=)
-    }
-    if(mvwinch())
+    // Check chars at endpoints first
+    if((mvwinch(win, start.y, start.x) & A_CHARTEXT) == c || (mvwinch(win, end.y, end.x) & A_CHARTEXT) == c)
+        return true;
 
+    // Find unit vector between two points
+    Pos2D u = start;
+    double ux = end.x - start.x, uy = end.y - start.y;
+    double mag = sqrt(pow(ux, 2) + pow(uy, 2));
+    ux /= mag;
+    uy /= mag;
+
+
+    // Iterate over unit vector until endpoint is passed
+    for(int i = 0; i <= mag; i++)
+    {
+        u.y = start.y + (uy * i);
+        u.x = start.x + (ux * i);
+        if((mvwinch(win, u.y, u.x) & A_CHARTEXT) == c)
+        {
+            addch(' ');
+            return true;
+        }
+    }
+
+    return false;
 }
-*/
