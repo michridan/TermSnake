@@ -19,10 +19,10 @@ all: build
 # build depends upon main.cpp, then runs the command:
 # 	g++ -g -std=c++11 -o levelsort
 build: main.cpp
-	$(GPP) $(CFLAGS) -o $(BINNAME) main.cpp $(LINKS)
+	$(GPP) $(CFLAGS) -o bin/$(BINNAME) main.cpp $(LINKS)
 
 run: build
-	./$(BINNAME)
+	./bin/$(BINNAME)
 
 clean veryclean:
-	$(RM) $(BINNAME)
+	$(RM) bin/$(BINNAME)
