@@ -10,6 +10,6 @@ Being developed in Linux Mint, with future plans to make it as universally porta
 
 2. Add score display/high score system
 
-3. MAKE GITIGNORE
+3. ~MAKE GITIGNORE~
 
 4. Add gameover screen/replay option

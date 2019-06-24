@@ -1,3 +1,12 @@
+/****************************************
+*               game.h                  *
+* This file includes utility functions  *
+* and structs which are used in various *
+* other parts of the game code.         *
+****************************************/
+#ifndef GAME_H
+#define GAME_H
+
 #include <ncurses.h>
 #include <stdlib.h>
 #include <math.h>
@@ -7,12 +16,19 @@ struct Pos2D
     int x;
     int y;
 
-
     Pos2D operator=(const Pos2D &rhs)
     {
         x = rhs.x;
         y = rhs.y;
         return *this;
+    }
+
+    bool operator==(const Pos2D &rhs)
+    {
+        if(x == rhs.x && y == rhs.y)
+            return true;
+        else
+            return false;
     }
 };
 
@@ -29,7 +45,11 @@ void randomDraw(WINDOW *win, Pos2D bounds, char c)
 {
     int drawX = ((rand() % bounds.x) + 1) * 2, drawY = (rand() % bounds.y) + 1;
 
-    mvwaddch(win, drawY, drawX, c);
+    char oldc = mvwinch(win, drawY, drawX) & A_CHARTEXT;
+    if(oldc == ' ')
+        mvwaddch(win, drawY, drawX, c);
+    else
+        randomDraw(win, bounds, c);
 }
 
 bool charBetween(WINDOW *win, Pos2D start, Pos2D end, char c)
@@ -60,3 +80,5 @@ bool charBetween(WINDOW *win, Pos2D start, Pos2D end, char c)
 
     return false;
 }
+
+#endif

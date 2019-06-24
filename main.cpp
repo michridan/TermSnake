@@ -37,7 +37,7 @@ int main(void)
 
 	initx = (cols - (size * 2)) / 2;
 	inity = (rows - size) / 2;
-	board = newwin(size, size * 2, inity, initx);
+	board = newwin(size, size * 2 + 1, inity, initx);
 	box(board, 0, 0);
 	mvwprintw(board, (size / 2) - 1, (size) - 13, "Welcome to TermSnake v1.0!");
 	mvwprintw(board, (size / 2), (size) - 13, "Press any key to continue");
@@ -52,7 +52,7 @@ int main(void)
 	Snake snake(init);
 	randomDraw(board, (Pos2D){size - 2, size - 2}, 'o');
 	
-	while(key != 'q' && snake.inBounds(size))
+	while(key != 'q' && snake.isAlive(size))
 	{
 		draw = snake.getHead().get_pos();
 		mvwprintw(board, draw.y, draw.x, "O");		
@@ -93,12 +93,16 @@ int main(void)
 			break;
 		}
 		
-		mvwprintw(board, draw.y, draw.x, "0");		
+		mvwaddch(board, draw.y, draw.x, '@');		
 
 		wrefresh(board);
 		key = getch();
 	}
+	mvwaddch(board, draw.y, draw.x, 'X');
+	mvwprintw(board, (size / 2), (size) - 5, "Game Over");
+	wrefresh(board);
 	
+	while(getch() == ERR);
 	endwin();
 	return 0;
 }
