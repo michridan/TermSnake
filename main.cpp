@@ -1,5 +1,5 @@
 /*	TermSnake: A game by Michael Dandrea
- *	Last Updated: 3/21/19
+ *	Last Updated: 8/7/19
  *	Description: This game will ultimately be a version of the classic Snake game to be played in terminal
  */
 
@@ -11,8 +11,9 @@ int main(void)
 {
 	WINDOW *board;
 	int rows, cols, inity, initx, size;
-	int key;
+	int key, fresh;
 	srand(time(nullptr));
+	const Pos2D lft = {-2, 0}, rt = {2, 0}, u = {0, -1}, dn = {0, 1};
 
 	// Initializing the curses environment for the game
 	initscr(); 
@@ -54,24 +55,29 @@ int main(void)
 	
 	while(key != 'q' && snake.isAlive(size))
 	{
+		fresh = time(nullptr);
 		draw = snake.getHead().get_pos();
 		mvwprintw(board, draw.y, draw.x, "O");		
 
 		if(key == KEY_UP)
 		{
-			velocity = { 0, -1 };
+			if(velocity != u && velocity != dn)
+				velocity = u;
 		}
 		if(key == KEY_DOWN)
 		{
-			velocity = { 0, 1 };
+			if(velocity != u && velocity != dn)
+				velocity = (Pos2D){ 0, 1 };
 		}
 		if(key == KEY_LEFT)
 		{
-			velocity = { -2, 0 };
+			if(velocity != lft && velocity != rt)
+				velocity = lft;
 		}
 		if(key == KEY_RIGHT)
 		{
-			velocity = { 2, 0 };
+			if(velocity != lft && velocity != rt)
+				velocity = rt;
 		}
 
 		Pos2D before = snake.getHead().get_pos();

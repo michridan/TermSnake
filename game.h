@@ -30,6 +30,11 @@ struct Pos2D
         else
             return false;
     }
+
+    bool operator!=(const Pos2D &rhs)
+    {
+        return !(*this == rhs);
+    }
 };
 
 Pos2D operator+(Pos2D lhs, Pos2D rhs)
@@ -39,6 +44,35 @@ Pos2D operator+(Pos2D lhs, Pos2D rhs)
     sum.x = lhs.x + rhs.x;
     sum.y = lhs.y + rhs.y;
     return sum;
+}
+
+Pos2D operator*(Pos2D lhs, Pos2D rhs)
+{
+    Pos2D prod;
+
+    prod.x = lhs.x * rhs.x;
+    prod.y = lhs.y * rhs.y;
+    return prod;
+}
+
+Pos2D operator&(Pos2D lhs, Pos2D rhs)
+{
+    return {lhs.x & rhs.x, lhs.y & rhs.y};
+}
+
+Pos2D operator|(Pos2D lhs, Pos2D rhs)
+{
+    return {lhs.x | rhs.x, lhs.y | rhs.y};
+}
+
+Pos2D operator!(Pos2D op)
+{
+    return {!op.x, !op.y};
+}
+
+Pos2D operator^(Pos2D lhs, Pos2D rhs)
+{
+    return (lhs & !rhs) | (!lhs & rhs);
 }
 
 void randomDraw(WINDOW *win, Pos2D bounds, char c)

@@ -13,3 +13,9 @@ Being developed in Linux Mint, with future plans to make it as universally porta
 3. ~MAKE GITIGNORE~
 
 4. Add gameover screen/replay option
+
+5. Fix following bugs:
+
+    - Holding key causes snake to move too quickly (implement consistent refresh rate)
+
+    - ~Snake can move backward into itself~
