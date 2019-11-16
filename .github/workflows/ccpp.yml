@@ -9,6 +9,8 @@ jobs:
     
     steps:
     - uses: actions/checkout@v1
+    - name: dependencies
+      run: apt-get install libncurses5-dev 
     - name: build
       run: make
     - name: clean
