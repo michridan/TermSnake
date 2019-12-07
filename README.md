@@ -19,7 +19,7 @@ cmake -DCMAKE_BUILD_TYPE=Release ..
 cmake --build .
 ```
 
-The executable will be in the directory "Release"
+The executable will be in the directory "Release". This program has been tested and is working with Git Bash for windows and Powershell.
 
 ### Linux
 For linux, the ncurses package is required, as well as make. On debian based systems you can run:
