@@ -3,15 +3,16 @@
  *	Description: This game will ultimately be a version of the classic Snake game to be played in terminal
  */
 
-#include <ncurses.h>
+#include "curses_include.h"
 #include "snake.h"
 //#include "game.h"
+#include <ctime>
 
 int main(void)
 {
 	WINDOW *board;
 	int rows, cols, inity, initx, size;
-	int key;
+	int key = 0;
 	srand(time(nullptr));
 
 	// Initializing the curses environment for the game
@@ -50,7 +51,7 @@ int main(void)
 
 	Pos2D velocity = { 0, 0 }, init = { size, size/2 }, draw, temp;
 	Snake snake(init);
-	randomDraw(board, (Pos2D){size - 2, size - 2}, 'o');
+	randomDraw(board, {size - 2, size - 2}, 'o');
 	
 	while(key != 'q' && snake.inBounds(size))
 	{
@@ -85,7 +86,7 @@ int main(void)
 		}
 		else
 		{
-			randomDraw(board, (Pos2D){size - 2, size - 2}, 'o');
+			randomDraw(board, {size - 2, size - 2}, 'o');
 		}
 
 		if((mvwinch(board, draw.y, draw.x) & A_CHARTEXT) == 'O')
